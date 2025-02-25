@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECell IIT Roorkee</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Variables */
+        :root {
+            /* Light Theme */
+            --primary-light: #2563eb;
+            --secondary-light: #1e40af;
+            --accent-light: #3b82f6;
+            --light-light: #ffffff;
+            --dark-light: #0f172a;
+            --gray-light: #f1f5f9;
+            --text-light: #334155;
+            --card-bg-light: rgba(255, 255, 255, 0.8);
+            --border-light: rgba(255, 255, 255, 0.2);
+
+            /* Dark Theme */
+            --primary-dark: #3b82f6;
+            --secondary-dark: #60a5fa;
+            --accent-dark: #93c5fd;
+            --light-dark: #1e293b;
+            --dark-dark: #0f172a;
+            --gray-dark: #1e293b;
+            --text-dark: #e2e8f0;
+            --card-bg-dark: rgba(30, 41, 59, 0.8);
+            --border-dark: rgba(255, 255, 255, 0.1);
+
+            /* Common */
+            --border-radius: 12px;
+            --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        .light {
+            --primary: var(--primary-light);
+            --secondary: var(--secondary-light);
+            --accent: var(--accent-light);
+            --light: var(--light-light);
+            --dark: var(--dark-light);
+            --gray: var(--gray-light);
+            --text: var(--text-light);
+            --card-bg: var(--card-bg-light);
+            --border: var(--border-light);
+        }
+
+        .dark {
+            --primary: var(--primary-dark);
+            --secondary: var(--secondary-dark);
+            --accent: var(--accent-dark);
+            --light: var(--light-dark);
+            --dark: var(--dark-dark);
+            --gray: var(--gray-dark);
+            --text: var(--text-dark);
+            --card-bg: var(--card-bg-dark);
+            --border: var(--border-dark);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background-color: var(--gray);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        /* Glass Morphism */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--box-shadow);
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Full-Screen Sections */
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 0;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--light);
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo i {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .nav-links .active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-links .active:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--gray);
+            color: var(--text);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+            background-color: var(--primary);
+            color: var(--light);
+        }
+
+        /* Hero Section */
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+    color: var(--light-light);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: 300% 300%; /* Larger gradient shift */
+    animation: gradientAnimation 8s ease infinite; /* Faster animation */
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://via.placeholder.com/1200x800') center/cover no-repeat;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.1); /* Glass morphism effect */
+    backdrop-filter: blur(15px); /* Stronger blur */
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Deeper shadow */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Brighter border */
+    max-width: 800px;
+    margin: 0 auto;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.hero-content:hover {
+    transform: scale(1.02); /* Slight scale-up on hover */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+.hero h1 {
+    font-size: 4rem; /* Larger font size */
+    margin-bottom: 1.5rem;
+    animation: fadeInDown 1s ease-out;
+    font-weight: 700;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); /* Stronger text shadow */
+    letter-spacing: -1px; /* Slightly tighter letter spacing */
+}
+
+.hero p {
+    font-size: 1.3rem; /* Slightly larger font size */
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    animation: fadeInUp 1s ease-out;
+    opacity: 0.9;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9); /* Brighter text */
+}
+
+.search-bar {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    display: flex;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Deeper shadow */
+    animation: fadeIn 1.2s ease-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-bar:hover {
+    transform: translateY(-8px); /* Larger lift on hover */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 1.2rem;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: var(--dark-light);
+    background-color: transparent;
+}
+
+.search-bar button {
+    background-color: var(--primary);
+    color: var(--light-light);
+    border: none;
+    padding: 1.2rem 2rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600; /* Bold text */
+}
+
+.search-bar button:hover {
+    background-color: var(--secondary);
+    transform: scale(1.1); /* Larger scale on hover */
+}
+
+/* Gradient Animation */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Mouse Movement Effect */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 10%, transparent 10.01%);
+    background-size: 30px 30px; /* Larger dots */
+    pointer-events: none;
+    animation: moveBackground 6s linear infinite;
+}
+
+@keyframes moveBackground {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(-30px, -30px); /* Larger movement */
+    }
+}
+
+        /* Events Section */
+        .events-section {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: var(--light-light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            animation: scaleIn 1.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from { transform: translateX(-50%) scaleX(0); }
+            to { transform: translateX(-50%) scaleX(1); }
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .event-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-image {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .event-card:hover .event-image img {
+            transform: scale(1.1);
+        }
+
+        .event-date {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--accent);
+            color: var(--light-light);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+        }
+
+        .event-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--primary);
+            color: var(--light-light);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+        }
+
+        .event-content {
+            padding: 1.5rem;
+        }
+
+        .event-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .event-info {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        .event-info div {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .event-description {
+            color: var(--text);
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .event-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .view-details-btn {
+            background-color: var(--primary);
+            color: var(--light-light);
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .view-details-btn:hover {
+            background-color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        /* Team Section */
+        .team-section {
+            background-color: var(--light);
+            color: var(--text);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .team-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-image {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .team-card:hover .team-image img {
+            transform: scale(1.1);
+        }
+
+        .team-content {
+            padding: 1.5rem;
+        }
+
+        .team-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .team-role {
+            font-size: 0.9rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--light-light);
+            padding: 4rem 0 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            color: var(--light-light);
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .footer-column:hover h3:after {
+            width: 50px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            transition: var(--transition);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            margin-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            color: var(--light-light);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px) rotate(10deg);
+        }
+
+        .contact-info div {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-info i {
+            color: var(--accent);
+            margin-top: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 1.5s ease-out;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Loading */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(59, 130, 246, 0.1);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Error State */
+        .error-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text);
+        }
+
+        .error-icon {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { 
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from { 
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                flex-direction: column;
+                gap: 0;
+                background-color: var(--light);
+                width: 100%;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+                transition: var(--transition);
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+                padding: 1rem 2rem;
+            }
+
+            .nav-links a:after {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+<header>
+    <div class="container">
+        <nav class="navbar">
+            <a href="#" class="logo animate__animated animate__fadeIn">
+                <i class="fas fa-lightbulb"></i>
+                <span>ECell IIT Roorkee</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-sun"></i>
+            </div>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="animate__animated animate__fadeInDown">Empowering Student Entrepreneurs</h1>
+            <p class="animate__animated animate__fadeInUp">Connect with innovators, access resources, and transform your ideas into successful ventures with ECell IIT Roorkee.</p>
+            <div class="search-bar animate__animated animate__fadeIn">
+                <input type="text" placeholder="Search for events, workshops, or resources..." id="search-input">
+                <button type="submit"><i class="fas fa-search"></i> Search</button>
+            </div>
+        </div>
+    </div>
+</section>
+ <!-- Events Section -->
+<section class="events-section" id="events">
+    <div class="container">
+        <div class="section-title">
+            <h2>Upcoming Events</h2>
+        </div>
+        <div class="events-grid">
+            <!-- Sample Event Cards -->
+            <div class="event-card">
+                <div class="event-image">
+                    <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Event Image">
+                    <div class="event-date">Oct 25, 2023</div>
+                    <div class="event-category">Workshop</div>
+                </div>
+                <div class="event-content">
+                    <h3 class="event-title">Startup Bootcamp</h3>
+                    <div class="event-info">
+                        <div><i class="fas fa-clock"></i> 10:00 AM - 4:00 PM</div>
+                        <div><i class="fas fa-map-marker-alt"></i> IIT Roorkee</div>
+                    </div>
+                    <p class="event-description">Learn the fundamentals of building a startup from industry experts.</p>
+                    <div class="event-footer">
+                        <a href="#" class="view-details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="event-card">
+                <div class="event-image">
+                    <img src="https://images.pexels.com/photos/1181673/pexels-photo-1181673.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Event Image">
+                    <div class="event-date">Nov 10, 2023</div>
+                    <div class="event-category">Competition</div>
+                </div>
+                <div class="event-content">
+                    <h3 class="event-title">Hackathon 2023</h3>
+                    <div class="event-info">
+                        <div><i class="fas fa-clock"></i> 9:00 AM - 9:00 PM</div>
+                        <div><i class="fas fa-map-marker-alt"></i> IIT Roorkee</div>
+                    </div>
+                    <p class="event-description">A 12-hour coding marathon to solve real-world problems.</p>
+                    <div class="event-footer">
+                        <a href="#" class="view-details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="event-card">
+                <div class="event-image">
+                    <img src="https://images.pexels.com/photos/6476589/pexels-photo-6476589.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Event Image">
+                    <div class="event-date">Nov 20, 2023</div>
+                    <div class="event-category">Webinar</div>
+                </div>
+                <div class="event-content">
+                    <h3 class="event-title">AI in Business</h3>
+                    <div class="event-info">
+                        <div><i class="fas fa-clock"></i> 6:00 PM - 7:30 PM</div>
+                        <div><i class="fas fa-map-marker-alt"></i> Online</div>
+                    </div>
+                    <p class="event-description">Explore how AI is transforming businesses globally.</p>
+                    <div class="event-footer">
+                        <a href="#" class="view-details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="team-section" id="team">
+    <div class="container">
+        <div class="section-title">
+            <h2>Our Team</h2>
+        </div>
+        <div class="team-grid">
+            <!-- Sample Team Members -->
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Team Member">
+                </div>
+                <div class="team-content">
+                    <h3 class="team-name">John Doe</h3>
+                    <p class="team-role">President</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Team Member">
+                </div>
+                <div class="team-content">
+                    <h3 class="team-name">Jane Smith</h3>
+                    <p class="team-role">Vice President</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Team Member">
+                </div>
+                <div class="team-content">
+                    <h3 class="team-name">Alice Johnson</h3>
+                    <p class="team-role">Event Coordinator</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Team Member">
+                </div>
+                <div class="team-content">
+                    <h3 class="team-name">Bob Brown</h3>
+                    <p class="team-role">Marketing Head</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About ECell IIT Roorkee</h3>
+                    <p>The Entrepreneurship Cell of IIT Roorkee is a student-run organization that promotes entrepreneurial spirit and innovative thinking among students by organizing various events, workshops, and competitions.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="#team">Team</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <div class="contact-info">
+                        <div>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>ECell Office, IIT Roorkee, Uttarakhand, India - 247667</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+91 123-456-7890</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-envelope"></i>
+                            <span>ecell@iitr.ac.in</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ECell IIT Roorkee. All rights reserved. Built with <i class="fas fa-heart" style="color: var(--accent);"></i> by ECell Tech Team</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        const themeIcon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', function() {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                themeIcon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                themeIcon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // Load saved theme from localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            htmlElement.classList.remove('light');
+            htmlElement.classList.add('dark');
+            themeIcon.className = 'fas fa-moon';
+        } else {
+            htmlElement.classList.remove('dark');
+            htmlElement.classList.add('light');
+            themeIcon.className = 'fas fa-sun';
+        }
+
+        // Smooth scrolling for navbar links
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Mouse movement interaction
+        document.addEventListener('mousemove', (e) => {
+            const heroSection = document.querySelector('.hero');
+            const x = (window.innerWidth - e.pageX) / 20;
+            const y = (window.innerHeight - e.pageY) / 20;
+            heroSection.style.backgroundPosition = `${x}px ${y}px`;
+        });
+    </script>
+</body>
+</html>
